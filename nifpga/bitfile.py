@@ -176,7 +176,8 @@ class Fifo(object):
         for datatype in DataType:
             if str(datatype) in string_datatype:
                 self._datatype = datatype
-        assert self._datatype is not None, "FIFO '%s' has unknown type" % self._name
+        if self._datatype is None:
+            warnings.warn("FIFO '%s' has unsupported type" % self._name)
 
     @property
     def datatype(self):
